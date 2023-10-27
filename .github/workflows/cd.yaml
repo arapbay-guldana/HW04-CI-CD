@@ -1,0 +1,11 @@
+name: CD Workflow
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      ssh_key: ${{ secrets.SSH_KEY }}
+    steps:
+    - uses: actions/checkout@v3
+    - run: echo $ssh_key
