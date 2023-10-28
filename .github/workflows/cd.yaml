@@ -27,4 +27,4 @@ jobs:
           script: |
             mkdir -p ~/Guldana
             result=$(python3 ~/Guldana/task.py ${{ env.SEED }})
-            echo "$result" > task42.txt
+            echo "$result" > ~/Guldana/task42.txt
