@@ -7,9 +7,6 @@ jobs:
     env:
       ssh_key: ${{ secrets.SSH_KEY }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
     - name: SSH and Create Guldana folder with task41.txt in it on Server
       uses: appleboy/ssh-action@master
       with: 
@@ -21,4 +18,5 @@ jobs:
           touch ~/Guldana/task41.txt 
 
     - name: Run updated task.py with argument initial seed
+      uses: actions/checkout@v3
     - run: python3 task.py 100
