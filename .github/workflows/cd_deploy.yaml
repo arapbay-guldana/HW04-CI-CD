@@ -20,4 +20,7 @@ jobs:
         username: bdb2c2023q4_guest_3
         key: ${{ secrets.SSH_KEY }}
         script: |
-          scp task42.txt bdb2c2023q4_guest_3@brain-client.bigdatateam.org:~/bdb2c2023q4_guest_3/Guldana/task42.txt
+          local_file="task42.txt"
+          remote_dir="~/bdb2c2023q4_guest_3/Guldana"
+          remote_file="$remote_dir/task42.txt"
+          scp "$local_file" "bdb2c2023q4_guest_3@brain-client.bigdatateam.org:$remote_file"
