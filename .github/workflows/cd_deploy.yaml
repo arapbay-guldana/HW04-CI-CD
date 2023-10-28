@@ -5,12 +5,14 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Create SEED variable and send results of main function in task42.txt
+    - name: Checkout code
       uses: actions/checkout@v3
+
+    - name: Create SEED variable and send results of main function in task42.txt
       run: |
         SEED=200
         python3 task.py $SEED > task42.txt
-        
+
     - name: Upload result task42.txt on Server    
       uses: appleboy/ssh-action@master
       with: 
