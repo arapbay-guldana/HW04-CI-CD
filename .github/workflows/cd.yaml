@@ -1,0 +1,30 @@
+name: CD Workflow
+on: [push]
+
+jobs:
+  touch_and_deploy:
+    runs-on: ubuntu-latest
+    env:
+      ssh_key: ${{ secrets.SSH_KEY }}
+      SEED: 200
+    steps:
+      - name: SSH and Create Guldana folder with task41.txt in it on Server
+        uses: appleboy/ssh-action@master
+        with: 
+          host: brain-client.bigdatateam.org
+          username: bdb2c2023q4_guest_3
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            mkdir -p ~/Guldana
+            touch ~/Guldana/task41.txt
+
+      - name: Run task.py and send results with task42.txt to remote server
+        uses: appleboy/ssh-action@master
+        with:
+          host: brain-client.bigdatateam.org
+          username: bdb2c2023q4_guest_3
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            mkdir -p ~/Guldana
+            result=$(python3 ~/Guldana/task.py ${{ env.SEED }})
+            echo "$result" > ~/Guldana/task42.txt
