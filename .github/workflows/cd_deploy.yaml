@@ -8,11 +8,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Create SEED variable and send results of main function in task42.txt
-      run: |
-        SEED=200
-        python3 task.py $SEED > task42.txt
-
     - name: Upload result task42.txt on Server    
       uses: appleboy/ssh-action@master
       with: 
@@ -20,7 +15,7 @@ jobs:
         username: bdb2c2023q4_guest_3
         key: ${{ secrets.SSH_KEY }}
         script: |
-          local_file="task42.txt"
-          remote_dir="~/bdb2c2023q4_guest_3/Guldana"
-          remote_file="$remote_dir/task42.txt"
-          scp "$local_file" "bdb2c2023q4_guest_3@brain-client.bigdatateam.org:$remote_file"
+          SEED=200
+          result=$(python3 task.py $SEED)
+          echo "$result" > task42.txt
+          scp task42.txt bdb2c2023q4_guest_3@brain-client.bigdatateam.org:~/bdb2c2023q4_guest_3/Guldana/task42.txt
