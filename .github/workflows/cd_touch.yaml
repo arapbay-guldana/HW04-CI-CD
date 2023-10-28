@@ -4,8 +4,6 @@ on: [push]
 jobs:
   touch:
     runs-on: ubuntu-latest
-    env:
-      ssh_key: ${{ secrets.SSH_KEY }}
     steps:
     - name: SSH and Create Guldana folder with task41.txt in it on Server
       uses: appleboy/ssh-action@master
@@ -15,8 +13,4 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         script: |
           mkdir -p ~/Guldana
-          touch ~/Guldana/task41.txt 
-
-    - name: Run updated task.py with argument initial seed
-      uses: actions/checkout@v3
-    - run: python3 task.py 100
+          touch ~/Guldana/task41.txt
